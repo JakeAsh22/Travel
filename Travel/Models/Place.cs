@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-
+using Travel.Controllers;
 namespace Travel.Models
 {
     public class Place

@@ -51,20 +51,26 @@ namespace Travel.Controllers
             return _db.Reviews.FirstOrDefault(entry => entry.ReviewId == id);
         }
 
-        [HttpPut("{id}")]
-        public void Put (int id, [FromBody] Review review)
+        [HttpPut("{id}/{name}")]
+        public void Put (int id, [FromBody] Review review, string name)
         {
-            review.ReviewId = id;
-            _db.Entry(review).State = EntityState.Modified;
-            _db.SaveChanges();
+            if (review.Name == name)
+            {
+                 review.ReviewId = id;
+                _db.Entry(review).State = EntityState.Modified;
+                _db.SaveChanges();
+            }
         }
 
-        [HttpDelete("{id}")]
-        public void Delete (int id)
+        [HttpDelete("{id}/{name}")]
+        public void Delete (int id, string name)
         {
             var reviewToDelete = _db.Reviews.FirstOrDefault(entry => entry.ReviewId == id);
+            if (reviewToDelete.Name == name)
+            { 
             _db.Reviews.Remove(reviewToDelete);
             _db.SaveChanges();
+            }
         }
 
     }

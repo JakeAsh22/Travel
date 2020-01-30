@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-
+using Travel.Controllers;
 namespace Travel.Models
 {
     public class Review
@@ -9,6 +9,7 @@ namespace Travel.Models
 
         //Sharons addition
         public int PlaceId { get; set; }
+        public string Name { get; set; }
         public virtual Place Place { get; set; }
     }
 }

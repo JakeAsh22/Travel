@@ -1,8 +1,9 @@
 using Microsoft.EntityFrameworkCore;
-
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Travel.Controllers;
 namespace Travel.Models
 {
-    public class TravelContext : DbContext
+    public class TravelContext : IdentityDbContext<ApplicationUser>
     {
         public TravelContext(DbContextOptions<TravelContext> options)
             : base(options)
@@ -14,6 +15,7 @@ namespace Travel.Models
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            base.OnModelCreating(builder);
             builder.Entity<Place>()
                 .HasData(
                     new Place { PlaceId = 1, City = "Tokyo", Country = "Japan"},
@@ -25,11 +27,11 @@ namespace Travel.Models
             
             builder.Entity<Review>()
                 .HasData(
-                    new Review { ReviewId = 1, individualReview = "Great!", PlaceId = 1},
-                    new Review { ReviewId = 2, individualReview = "I hated this place!", PlaceId = 2},
-                    new Review { ReviewId = 3, individualReview = "Highly recommend!!", PlaceId = 3},
-                    new Review { ReviewId = 4, individualReview = "I loved this place. I will come back!", PlaceId =  4},
-                    new Review { ReviewId = 5, individualReview = "It was ok.", PlaceId = 5}
+                    new Review { ReviewId = 1, individualReview = "Great!", PlaceId = 1, Name = "Jake"},
+                    new Review { ReviewId = 2, individualReview = "I hated this place!", PlaceId = 2, Name = "Shawn"},
+                    new Review { ReviewId = 3, individualReview = "Highly recommend!!", PlaceId = 3, Name = "Leilani"},
+                    new Review { ReviewId = 4, individualReview = "I loved this place. I will come back!", PlaceId =  4, Name = "Wei"},
+                    new Review { ReviewId = 5, individualReview = "It was ok.", PlaceId = 5, Name = "Sharon"}
                 );
         }
     }
